@@ -1,0 +1,71 @@
+---
+name: Build
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: npm install compare-versions@6
+
+      - uses: actions/github-script@v7
+        id: prepare
+        with:
+          script: |
+            const { compareVersions } = require(`compare-versions`);
+
+            const owner = context.payload.repository.owner.login;
+            const repo = context.payload.repository.name;
+
+            const originTags = (await github.rest.repos.listTags({ owner, repo })).data
+              .map((tag) => tag.name)
+              .sort(compareVersions)
+              .reverse();
+
+            const currentTag = context.ref.replace(`refs/tags/`, ``);
+            const isLatest = currentTag === originTags[0];
+
+            const dockerTags = [
+              `ghcr.io/${owner}/${repo}:${currentTag}`,
+              `yusoltsev/protoc:${currentTag}`,
+            ];
+
+            if (isLatest) {
+              dockerTags.push(`ghcr.io/${owner}/${repo}:latest`, `yusoltsev/protoc:latest`);
+            }
+
+            core.setOutput(`protocVersion`, currentTag.substring(1));
+            core.setOutput(`dockerTags`, dockerTags.join(`,`));
+
+      - uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/login-action@v3
+        with:
+          username: yusoltsev
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          build-args: PROTOC_VERSION=${{ steps.prepare.outputs.protocVersion }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.prepare.outputs.dockerTags }}
