@@ -3,6 +3,7 @@
 [![Build Status](https://github.com/yegor-usoltsev/protoc/actions/workflows/build.yml/badge.svg)](https://github.com/yegor-usoltsev/protoc/actions)
 [![Docker Image (docker.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=docker.io&sort=semver)](https://hub.docker.com/r/yusoltsev/protoc)
 [![Docker Image (ghcr.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=ghcr.io&sort=semver)](https://github.com/yegor-usoltsev/protoc/pkgs/container/protoc)
+[![Docker Image Size](https://img.shields.io/docker/image-size/yusoltsev/protoc?sort=semver&arch=amd64)](https://hub.docker.com/r/yusoltsev/protoc/tags)
 
 A lightweight, multi-platform Docker image for the Protocol Buffer Compiler (`protoc`).
 
