@@ -30,4 +30,4 @@ See [Docker Hub tags](https://hub.docker.com/r/yusoltsev/protoc/tags) for availa
 
 ## License and upstream
 
-This image packages [`protoc`](https://github.com/protocolbuffers/protobuf) from Google's Protocol Buffers project. See [LICENSE](LICENSE) for the included license text.
+This image packages [`protoc`](https://github.com/protocolbuffers/protobuf) from Google's Protocol Buffers project. See [LICENSE](https://github.com/yegor-usoltsev/protoc/blob/main/LICENSE) for the included license text.
