@@ -1,5 +1,10 @@
 # protoc
 
+[![Build Status](https://github.com/yegor-usoltsev/protoc/actions/workflows/build.yml/badge.svg)](https://github.com/yegor-usoltsev/protoc/actions)
+[![Docker Image (docker.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=docker.io&sort=semver)](https://hub.docker.com/r/yusoltsev/protoc)
+[![Docker Image (ghcr.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=ghcr.io&sort=semver)](https://github.com/yegor-usoltsev/protoc/pkgs/container/protoc)
+[![Docker Image Size](https://img.shields.io/docker/image-size/yusoltsev/protoc?sort=semver&arch=amd64)](https://hub.docker.com/r/yusoltsev/protoc/tags)
+
 Run Google's Protocol Buffer Compiler (`protoc`) in a Docker container to generate code from `.proto` files without installing the compiler on your host. Images are published for Linux AMD64 and ARM64.
 
 ## Usage
