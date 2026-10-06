@@ -5,49 +5,34 @@
 [![Docker Image (ghcr.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=ghcr.io&sort=semver)](https://github.com/yegor-usoltsev/protoc/pkgs/container/protoc)
 [![Docker Image Size](https://img.shields.io/docker/image-size/yusoltsev/protoc?sort=semver&arch=amd64)](https://hub.docker.com/r/yusoltsev/protoc/tags)
 
-A lightweight, multi-platform Docker image for the Protocol Buffer Compiler (`protoc`).
-
-## Overview
-
-This repository provides a Docker image that packages the [Protocol Buffer Compiler (`protoc`)](https://github.com/protocolbuffers/protobuf), a tool developed by Google. `protoc` is integral to the Protocol Buffers framework, which provides a language-neutral, platform-neutral, and extensible mechanism for serializing structured data.
+Run Google's Protocol Buffer Compiler (`protoc`) in a Docker container to generate code from `.proto` files without installing the compiler on your host. Images are published for Linux AMD64 and ARM64.
 
 ## Usage
 
-To run `protoc` using this Docker image, execute the following command:
+Put your `.proto` files in the current directory and run:
 
-```bash
-docker run --rm -v $(pwd):$(pwd) -w $(pwd) yusoltsev/protoc [OPTION] PROTO_FILES
+```sh
+docker run --rm \
+  --mount "type=bind,source=$PWD,target=/work" \
+  --workdir /work \
+  yusoltsev/protoc \
+  --python_out=. example.proto
 ```
 
-### Example
+Replace `--python_out=.` with the output option for your target language. The image adds `/include` and the current directory to the import paths, so it can find bundled `.proto` includes and files mounted from your working directory.
 
-Replace `[OPTION]` and `PROTO_FILES` with your specific options and Protocol Buffer files. For instance:
+To see the compiler options, run:
 
-```bash
-docker run --rm -v $(pwd):$(pwd) -w $(pwd) yusoltsev/protoc --python_out=. example.proto
-```
-
-For detailed help and available options, use:
-
-```bash
+```sh
 docker run --rm yusoltsev/protoc --help
 ```
 
-## Docker Images
+## Image registries
 
-This Docker image is accessible across multiple platforms and can be pulled from the following registries:
+Images are available from [Docker Hub](https://hub.docker.com/r/yusoltsev/protoc) and [GitHub Container Registry](https://github.com/yegor-usoltsev/protoc/pkgs/container/protoc).
 
-- **Docker Hub**: [`yusoltsev/protoc`](https://hub.docker.com/r/yusoltsev/protoc)
-- **GitHub Container Registry**: [`ghcr.io/yegor-usoltsev/protoc`](https://ghcr.io/yegor-usoltsev/protoc)
+See [Docker Hub tags](https://hub.docker.com/r/yusoltsev/protoc/tags) for available versions and the [build workflow](https://github.com/yegor-usoltsev/protoc/actions/workflows/build.yml) for build status.
 
-## Contributing
+## License and upstream
 
-Pull requests are welcome. For major changes, please [open an issue](https://github.com/yegor-usoltsev/protoc/issues/new) first to discuss what you would like to change.
-
-## License
-
-[LICENSE](https://github.com/yegor-usoltsev/protoc/blob/main/LICENSE)
-
-### Acknowledgments
-
-This project is based on the [Protocol Buffer Compiler](https://github.com/protocolbuffers/protobuf) originally developed by Google. The original source code is available under the [Google Protocol Buffers License](https://github.com/protocolbuffers/protobuf/blob/main/LICENSE).
+This image packages [`protoc`](https://github.com/protocolbuffers/protobuf) from Google's Protocol Buffers project. See [LICENSE](https://github.com/yegor-usoltsev/protoc/blob/main/LICENSE) for the included license text.
