@@ -1,11 +1,8 @@
 # protoc
 
-[![Build Status](https://github.com/yegor-usoltsev/protoc/actions/workflows/build.yml/badge.svg)](https://github.com/yegor-usoltsev/protoc/actions)
-[![Docker Image (docker.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=docker.io&sort=semver)](https://hub.docker.com/r/yusoltsev/protoc)
-[![Docker Image (ghcr.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=ghcr.io&sort=semver)](https://github.com/yegor-usoltsev/protoc/pkgs/container/protoc)
-[![Docker Image Size](https://img.shields.io/docker/image-size/yusoltsev/protoc?sort=semver&arch=amd64)](https://hub.docker.com/r/yusoltsev/protoc/tags)
+[![Build Status](https://github.com/yegor-usoltsev/protoc/actions/workflows/sync.yml/badge.svg)](https://github.com/yegor-usoltsev/protoc/actions) [![Docker Image (docker.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=docker.io&sort=semver)](https://hub.docker.com/r/yusoltsev/protoc) [![Docker Image (ghcr.io)](https://img.shields.io/docker/v/yusoltsev/protoc?label=ghcr.io&sort=semver)](https://github.com/yegor-usoltsev/protoc/pkgs/container/protoc) [![Docker Image Size](https://img.shields.io/docker/image-size/yusoltsev/protoc?sort=semver&arch=amd64)](https://hub.docker.com/r/yusoltsev/protoc/tags)
 
-Run Google's Protocol Buffer Compiler (`protoc`) in a Docker container to generate code from `.proto` files without installing the compiler on your host. Images are published for Linux AMD64 and ARM64.
+Run Google's Protocol Buffer Compiler (`protoc`) in a Docker container to generate code from `.proto` files without installing the compiler on your host. Images are published for Linux AMD64 and ARM64. New stable upstream releases (≥22.0) are automatically synced and published weekly.
 
 ## Usage
 
@@ -31,7 +28,7 @@ docker run --rm yusoltsev/protoc --help
 
 Images are available from [Docker Hub](https://hub.docker.com/r/yusoltsev/protoc) and [GitHub Container Registry](https://github.com/yegor-usoltsev/protoc/pkgs/container/protoc).
 
-See [Docker Hub tags](https://hub.docker.com/r/yusoltsev/protoc/tags) for available versions and the [build workflow](https://github.com/yegor-usoltsev/protoc/actions/workflows/build.yml) for build status.
+See [Docker Hub tags](https://hub.docker.com/r/yusoltsev/protoc/tags) for available versions and the [sync workflow](https://github.com/yegor-usoltsev/protoc/actions/workflows/sync.yml) for publication status. Version tags match upstream releases (for example, `v22.0`); `latest` tracks the newest stable version.
 
 ## License and upstream
 
